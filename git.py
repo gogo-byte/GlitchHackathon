@@ -2,7 +2,7 @@ import subprocess
 import requests
 
 # GitHub API and Authentication
-TOKEN = "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"  # Replace with your GitHub token
+TOKEN = "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"  # Replace with your GitHub token
 REPO_OWNER = "gogo-byte"  # Replace with the repository owner's username
 REPO_NAME = "GlitchHackathon"  # Replace with your repository name
 BRANCH_NAME = "feature/testbranch"  # The branch you're working on
