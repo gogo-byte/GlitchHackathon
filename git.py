@@ -30,7 +30,7 @@ def create_pull_request():
     pr_data = {
         "title": f"PR from {BRANCH_NAME}",
         "head": BRANCH_NAME,  # The branch you're working on
-        "base": BASE_BRANCH,  # The base branch you're merging into
+        "base": BASE_BRANCH,  # The base branch you're merging intooo
         "body": "Automated pull request created via Python script...."
     }
     headers = {
