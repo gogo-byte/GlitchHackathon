@@ -1,0 +1,44 @@
+name: Auto Fix with GPT-4o
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Run auto-fix script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/auto_fix.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout -b gpt-auto-fix
+          git add .
+          git commit -m "Auto code fixes using GPT-4o"
+          git push origin gpt-auto-fix
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gpt-auto-fix
+          title: "GPT-4o Auto Code Fixes"
+          body: "This PR contains automatic code fixes using SonarQube + GPT-4o."
